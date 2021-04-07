@@ -12,12 +12,19 @@ pip3 install pandas
 To download Python 3: https://www.python.org/downloads/
 
 ## High Level Idea
-TODO -- determine what the activity is!
-We're going to scrape a single webpage and use that information to build something useful/cool!
+Recycle, or not to recycle? That is the question. TODO: continue
 
 ## Instructions
 
-1. 
+1. First, let's scrape ethical brands for our desired clothing type from https://goodonyou.eco/. Before we can scrape data though, we need to check whether the site allows it -- so, append `/robots.txt` to the end of the URL (full URL: `https://goodonyou.eco/robots.txt`), and see what they allow. You should see the file contents below:
+```
+User-agent: *
+Allow: /
+```
+
+2. By saying `Allow: /`, the robots.txt file indicates that we are permitted to scrape any folder in the website. Huzzah! We now have permission to proceed. CONTINUE HERE
+
+3. 
 
 And you're done! Congrats, you have completed the workshop!
 
