@@ -1,31 +1,34 @@
 import requests
 from bs4 import BeautifulSoup
 
-# Step 1: Define URL to scrape and the item you would like to search
+# Part A: Define URL to scrape and the item you would like to search
 URL = 'https://removeandreplace.com/2013/09/24/complete-list-can-recycle/'
 ITEM = input("Item to recycle?: ")
-print('----------------')
 
-# Step 2: Grab the data with a GET request
+# Part B: Grab the data with a GET request
 r = requests.get(URL)
 
-# Step 3: Parse the HTML using Beautiful Soup
+# Part C: Parse the HTML using Beautiful Soup
 soup = BeautifulSoup(r.text, 'html.parser')
 items = soup.findAll('strong')
 
-# Step 4: Filter out items that can be recycled and clean output
+# Part D: Filter out items that can be recycled and clean output
 recyclable = []
 include = False
 for item in items:
-    if str(item) == '<strong>YOU <span style="text-decoration: underline;">CAN</span> RECYCLE:</strong>':
+    val = item.text                     # Extract text from the HTML tag
+    if val == 'YOU CAN RECYCLE:':       # Include items following this tag
         include = True
-    elif str(item) == '<strong>YOU <span style="text-decoration: underline;">CANNOT</span> RECYCLE:</strong>':
+    elif val == 'YOU CANNOT RECYCLE:':  # Stop including items when you encounter this tag
         include = False
     else:
         if include:
-            recyclable.append(item.text)
+            recyclable.append(val)
 
-# Step 5: Print out the relevant searched items
+# Part E: Print out the relevant searched items
+print('----------------')
 for item in recyclable:
     if ITEM in item:
-        print(item)
+        print('> ' + item)
+print('----------------')
+print('-End of Results-')
